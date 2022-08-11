@@ -52,6 +52,7 @@
         <table>
           <thead>
             <tr>
+              <th>Id</th>
               <th>Name</th>
               <th>Category</th>
               <th>Action</th>
@@ -59,6 +60,7 @@
           </thead>
           <tbody>
             <tr v-for="(todo, index) in todos_asc" :key="index">
+            <td>{{index+1}}</td>
               <td>{{ todo.content }}</td>
               <td>{{ todo.category }}</td>
               <td><button class="btn" @click="removeTodo(todo)">Delete</button></td>
@@ -71,21 +73,26 @@
   </main>
 </template>
 
-<script setup>
+<script  setup>
 const { ref } = require("@vue/reactivity");
 const { computed, watch, onMounted } = require("@vue/runtime-core");
 
 const todos = ref([]);
 const name = ref("");
-const input_content = ref("");
+const input_content= ref("");
 const input_category = ref(null);
 const msg = ref("");
 
 const todos_asc = computed(() =>
   todos.value.sort((a, b) => {
-    return b.createdAt - a.createdAt;
+    return a.content.localeCompare(b.content)
   })
 );
+// interface typetodo{
+//   content:string,
+//   category:string,
+//   done:boolean
+// }
 const addTodo = () => {
   if (input_content.value.trim() === "" || input_category.value == null) {
     return (msg.value = "Please enter todo list name and also choose category..?");
@@ -144,7 +151,7 @@ body {
   background-color: lightgreen;
 }
 .table-list{
-  padding-left:450px;
+  padding-left:400px;
  
   
 }
