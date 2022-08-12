@@ -42,8 +42,8 @@
             <div>Personal</div>
           </label>
         </div>
-        <h4 class="error">{{ msg }}</h4>
-        <input type="submit" class="btn" value="Add Todo" />
+        <!-- <h4 class="error">{{ msg }}</h4> -->
+        <input  type="submit" class="btn" value="Add Todo" />
       </form>
     </section>
     <section>
@@ -70,6 +70,12 @@
       </div>
     </section>
     <!-- {{todos_asc}} -->
+    <Teleport to="body">
+       <div v-if="open" class="modal">
+       <p>Please enter the name and also choose category</p>
+       <button @click="open=false" class="btn">Close</button>
+       </div>
+    </Teleport>
   </main>
 </template>
 
@@ -81,7 +87,8 @@ const todos = ref([]);
 const name = ref("");
 const input_content= ref("");
 const input_category = ref(null);
-const msg = ref("");
+// const msg = ref("");
+const open=ref(false)
 
 const todos_asc = computed(() =>
   todos.value.sort((a, b) => {
@@ -91,7 +98,8 @@ const todos_asc = computed(() =>
 
 const addTodo = () => {
   if (input_content.value.trim() === "" || input_category.value == null) {
-    return (msg.value = "Please enter todo list name and also choose category..?");
+    // return (msg.value = "Please enter todo list name and also choose category..?");
+    return open.value=true
   }
 
   todos.value.push({
@@ -206,6 +214,20 @@ height: 30px;
   transition: 0.4s;
   box-shadow: 0px 0px 8px rgba(0,0,0,0.25);
   
+}
+.modal{
+  position: fixed;
+  z-index: 999;
+  top: 20%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  background-color: red;
+  color:white;
+  font-weight: 800;
+  text-align: center;
+font-size: 20px;
+border: none;
 }
 
 
