@@ -88,11 +88,7 @@ const todos_asc = computed(() =>
     return a.content.localeCompare(b.content)
   })
 );
-// interface typetodo{
-//   content:string,
-//   category:string,
-//   done:boolean
-// }
+
 const addTodo = () => {
   if (input_content.value.trim() === "" || input_category.value == null) {
     return (msg.value = "Please enter todo list name and also choose category..?");
@@ -151,7 +147,7 @@ body {
   background-color: lightgreen;
 }
 .table-list{
-  padding-left:400px;
+  padding-left:700px;
  
   
 }
